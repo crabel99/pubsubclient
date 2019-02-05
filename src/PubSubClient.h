@@ -92,7 +92,7 @@ private:
    uint16_t nextMsgId;
    unsigned long lastOutActivity;
    unsigned long lastInActivity;
-   bool pingOutstanding;
+   unsigned long t;
    MQTT_CALLBACK_SIGNATURE;
    uint16_t readPacket(uint8_t*);
    boolean readByte(uint8_t * result);
@@ -132,6 +132,8 @@ public:
    PubSubClient& setClient(Client& client);
    PubSubClient& setStream(Stream& stream);
 
+   bool pingOutstanding;
+   
    boolean connect(const char* id);
    boolean connect(const char* id, const char* user, const char* pass);
    boolean connect(const char* id, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage);
@@ -164,6 +166,8 @@ public:
    boolean subscribe(const char* topic);
    boolean subscribe(const char* topic, uint8_t qos);
    boolean unsubscribe(const char* topic);
+   boolean read();
+   boolean ping();
    boolean loop();
    boolean connected();
    int state();
